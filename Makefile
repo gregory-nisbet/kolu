@@ -52,11 +52,12 @@ ALL_A= $(LUA_A)
 
 # pcc also doesnt work.
 all_compilers:
-	gcc -o kolu.gcc onekolu.c -lm
+	gcc -o kolu.gcc onekolu.c -lm -z noexecstack
 	tcc -o kolu.tcc onekolu.c -lm
-	clang -o kolu.clang onekolu.c -lm
-	g++ -o kolu.gxx onekolu.cpp -lm
-	clang++ -o kolu.clangxx onekolu.cpp -lm
+	clang -o kolu.clang onekolu.c -lm -z noexecstack
+	pcc -o kolu.clangxx onekolu.c -lm -z noexecstack
+	g++ -o kolu.gxx onekolu.cpp -lm -z noexecstack
+	clang++ -o kolu.clangxx onekolu.cpp -lm -z noexecstack
 	# doesn't work yet.
 	# emcc -s WASM=0 -o kolu.js onekolu.c -lm
 

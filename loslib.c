@@ -1,4 +1,5 @@
 /*
+	tcc -o=kolu.tcc onekolu.c -lm
 ** $Id: loslib.c $
 ** Standard Operating System library
 ** See Copyright Notice in lua.h
@@ -101,7 +102,7 @@
 */
 #if !defined(lua_tmpnam)	/* { */
 
-#if defined(LUA_USE_POSIX)	/* { */
+#if 1 || defined(LUA_USE_POSIX)	/* { */
 
 #include <unistd.h>
 
@@ -118,6 +119,8 @@
         e = (e == -1); }
 
 #else				/* }{ */
+
+#error "This is insecure. Don't use it."
 
 /* ISO C definitions */
 #define LUA_TMPNAMBUFSIZE	L_tmpnam
