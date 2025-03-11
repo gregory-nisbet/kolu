@@ -11,7 +11,7 @@ CFLAGS= -O2 -Wall -Wextra -DLUA_COMPAT_5_3 $(SYSCFLAGS) $(MYCFLAGS)
 LDFLAGS= $(SYSLDFLAGS) $(MYLDFLAGS)
 LIBS= -lm $(SYSLIBS) $(MYLIBS)
 
-GARBAGE := kolu.gcc kolu.clang kolu.tcc kolu.g++ kolu.clang++
+GARBAGE := kolu.gcc kolu.clang kolu.pcc kolu.tcc kolu.g++ kolu.clang++
 
 AR= ar rcu
 RANLIB= ranlib
@@ -55,7 +55,7 @@ all_compilers:
 	gcc -o kolu.gcc onekolu.c -lm -z noexecstack
 	tcc -o kolu.tcc onekolu.c -lm
 	clang -o kolu.clang onekolu.c -lm -z noexecstack
-	pcc -o kolu.clangxx onekolu.c -lm -z noexecstack
+	pcc -o kolu.pcc onekolu.c -lm -z noexecstack
 	g++ -o kolu.gxx onekolu.cpp -lm -z noexecstack
 	clang++ -o kolu.clangxx onekolu.cpp -lm -z noexecstack
 	# doesn't work yet.
@@ -85,7 +85,7 @@ test:
 	./$(LUA_T) -v
 
 clean:
-	$(RM) $(ALL_T) $(ALL_O)
+	$(RM) $(ALL_T) $(ALL_O) $(GARBAGE)
 
 depend:
 	@$(CC) $(CFLAGS) -MM l*.c
