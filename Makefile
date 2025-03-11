@@ -11,6 +11,8 @@ CFLAGS= -O2 -Wall -Wextra -DLUA_COMPAT_5_3 $(SYSCFLAGS) $(MYCFLAGS)
 LDFLAGS= $(SYSLDFLAGS) $(MYLDFLAGS)
 LIBS= -lm $(SYSLIBS) $(MYLIBS)
 
+GARBAGE := kolu.gcc kolu.clang kolu.tcc kolu.g++ kolu.clang++
+
 AR= ar rcu
 RANLIB= ranlib
 RM= rm -f
@@ -46,6 +48,18 @@ LUAC_O=	luac.o
 ALL_O= $(BASE_O) $(LUA_O) $(LUAC_O)
 ALL_T= $(LUA_A) $(LUA_T) $(LUAC_T)
 ALL_A= $(LUA_A)
+
+
+# pcc also doesnt work.
+all_compilers:
+	gcc -o kolu.gcc onekolu.c -lm
+	tcc -o kolu.tcc onekolu.c -lm
+	clang -o kolu.clang onekolu.c -lm
+	g++ -o kolu.gxx onekolu.cpp -lm
+	clang++ -o kolu.clangxx onekolu.cpp -lm
+	# doesn't work yet.
+	# emcc -s WASM=0 -o kolu.js onekolu.c -lm
+
 
 # Targets start here.
 default: $(PLAT)

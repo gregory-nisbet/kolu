@@ -3,3 +3,9 @@
 # tags files
 tags
 TAGS
+# kolu executables
+kolu.gcc
+kolu.gxx
+kolu.clang
+kolu.clangxx
+kolu.tcc
